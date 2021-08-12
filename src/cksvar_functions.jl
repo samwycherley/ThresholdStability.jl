@@ -1,4 +1,4 @@
-
+export CKSVAR_to_TAR, CKSVAR_to_companion, CKSVAR_to_companionFD
 
 function split_by_var(C)
     # Splits 𝐂 into 𝐂₁ corresponding to 𝐘ₜ (all bar final row of 𝐂) and 𝐂₂ corresponding to 𝐘bar*ₜ (final row). I.e. 𝐂 = [𝐂₁; 𝐂₂].
