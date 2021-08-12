@@ -1,8 +1,7 @@
 ## Indicator
 
 function indicator(y, b; indregion = :above, ineq=:nonstrict)
-    """Indicator function. The default mode ('above') returns 𝟏{y ≥ b}. The other available mode, 'below', returns 𝟏{y ≤ b}.
-    Set 'ineq' to 'strict' to get 𝟏{y > b} or 𝟏{y < b}."""
+    # Indicator function. The default mode ('above') returns 𝟏{y ≥ b}. The other available mode, 'below', returns 𝟏{y ≤ b}. Set 'ineq' to 'strict' to get 𝟏{y > b} or 𝟏{y < b}.
     indregion = Symbol(indregion)
     ineq = Symbol(ineq)
     if ineq == :nonstrict
