@@ -1,7 +1,7 @@
 module ThresholdStability
 
 using MathematicalSystems
-using JuMP, SumOfSquares, DynamicPolynomials
+using JuMP, SumOfSquares, DynamicPolynomials, MultivariatePolynomials
 using CSDP
 using Combinatorics
 
