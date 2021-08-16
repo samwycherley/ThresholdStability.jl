@@ -1,6 +1,8 @@
 using ThresholdStability
 using Test
 
-@testset "ThresholdStability.jl" begin
-    # Write your tests here.
-end
+include("indicatort.jl")
+include("automatont.jl")
+include("cksvart.jl")
+include("veroneset.jl")
+include("stabilityt.jl")
