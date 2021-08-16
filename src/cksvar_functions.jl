@@ -9,7 +9,12 @@ end
 
 function split_by_lag(C, nlags)
     # Given p lags, this splits 𝐂 as per split_by_var and then separates 𝐂ᵢ into components 𝐂ᵢ¹,…,𝐂ᵢᵖ where 𝐂ᵢʲ is the component of 𝐂ᵢ corresponding to the jth lag.
-    k, n = size(C)
+    if ndims(C) == 1
+        k = size(C)
+        n = 1
+    else
+        k, n = size(C)
+    end
     @assert rem(n, nlags) == 0;
     m = Int(n / nlags)
     C1, C2 = split_by_var(C)
@@ -206,8 +211,8 @@ function CKSVAR_to_companionFD(F, Fstar, βtilde, nlags; diff=true)
                 A[k+1:2k-1, 1:k-1] = I + zeros(k-1, k-1)  # I
                 A[k+1:2k-1, k] = βtilde*(δ - 1)  # β(δ - 1)
                 A[2k, k] = δ  # δ
-                A[2k+1, k] = 1
                 if nlags > 2
+                    A[2k+1, k] = 1
                     A[2k+2:K, k+1:K-k-1] = I(K-2k-1)  # I
                 end
                 push!(Σ, A)
