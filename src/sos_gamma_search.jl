@@ -3,8 +3,6 @@
 import SwitchOnSafety: isinfeasible, isfeasible, isdecided, usestep
 export sosbound_γ, sosbound_gamma
 
-include("midpoints.jl")
-
 
 function sos_bisection_alg(s::StateDepDiscreteSwitchedLinearSystem, d, optimizer, lo, hi; verbose=1, tol=1e-5, step=0.5)
     @assert hi > lo

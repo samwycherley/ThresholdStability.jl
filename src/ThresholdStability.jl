@@ -14,7 +14,8 @@ include("automaton_constructor.jl")
 
 include("cksvar_functions.jl")
 
-include("veroneselift.jl")
+include("veronese_lift.jl")
+include("midpoints.jl")
 include("sdp_lyapunov_feasibility.jl")
 include("sdp_gamma_search.jl")
 include("sos_lyapunov_feasibility.jl")

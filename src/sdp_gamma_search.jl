@@ -4,9 +4,6 @@ import SwitchOnSafety: isinfeasible, isfeasible, isdecided, usestep
 export sdpbound_γ, sdpbound_gamma
 
 
-include("midpoints.jl")
-
-
 function sdpbisection_alg(s::StateDepDiscreteSwitchedLinearSystem, optimizer, lo, hi; verbose=1, tol=1e-5, step=0.5)
     @assert hi > lo
     while hi - lo ≥ tol
