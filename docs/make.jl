@@ -1,7 +1,10 @@
 using ThresholdStability
 using Documenter
 
-makedocs(
+makedocs(root="/",
+    source="src",
+    build="build",
+    modules=[ThresholdStability],
     authors="Sam Wycherley",
     repo="https://github.com/samwycherley/ThresholdStability.jl/blob/{commit}{path}#{line}",
     sitename="ThresholdStability.jl",
@@ -12,8 +15,6 @@ makedocs(
     ),
     pages=[
         "Home" => "index.md",
-        "Stability" => "stability.md",
-        "CKSVAR" => "cksvar.md"
     ],
 )
 
