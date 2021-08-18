@@ -3,7 +3,7 @@ export indicator
 """
     indicator(y, b; indregion=:above, ineq=:nonstrict)
 
-Indicator function of default form `1\{y\\geq b\}`. The inequality can be made strict and the direction of inequality can be reversed.
+Indicator function of default form ``1\{y\\geq b\}``. The inequality can be made strict and the direction of inequality can be reversed.
 
 # Arguments
 - `indregion=:above` (default): calculates ``1\{y\\geq b\}`` or ``1\{y>b\}``.
