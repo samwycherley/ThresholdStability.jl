@@ -1,10 +1,7 @@
 using ThresholdStability
 using Documenter
 
-DocMeta.setdocmeta!(ThresholdStability, :DocTestSetup, :(using ThresholdStability); recursive=true)
-
-makedocs(;
-    modules=[ThresholdStability],
+makedocs(
     authors="Sam Wycherley",
     repo="https://github.com/samwycherley/ThresholdStability.jl/blob/{commit}{path}#{line}",
     sitename="ThresholdStability.jl",
@@ -15,6 +12,8 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
+        "Stability" => "stability.md",
+        "CKSVAR" => "cksvar.md"
     ],
 )
 
