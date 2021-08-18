@@ -1,10 +1,5 @@
 export indicator
 
-"""
-    indicator(y, b; indregion=:above, ineq=:nonstrict)
-
-Indicator function of default form ``1\{y\\geq b\}``. The inequality can be made strict and the direction of inequality can be reversed.
-"""
 function indicator(y, b; indregion = :above, ineq=:nonstrict)
     # Indicator function. The default mode ('above') returns 𝟏{y ≥ b}. The other available mode, 'below', returns 𝟏{y ≤ b}. Set 'ineq' to 'strict' to get 𝟏{y > b} or 𝟏{y < b}.
     indregion = Symbol(indregion)
