@@ -1,13 +1,21 @@
 module ThresholdStability
 
-using MathematicalSystems, LinearAlgebra
+using MathematicalSystems, SwitchOnSafety
 using JuMP, SumOfSquares, DynamicPolynomials, MultivariatePolynomials
 using CSDP
-using Combinatorics
+using Combinatorics, LinearAlgebra
+
+"""
+    spectral_radius(A::AbstractMatrix)
+
+Calculates the spectral radius of matrix `A`, using a utility from [SwitchOnSafety.jl](https://github.com/blegat/SwitchOnSafety.jl).
+"""
+spectral_radius(A::AbstractMatrix) = ρ(A)  # from SwitchOnSafety.jl
+export spectral_radius
 
 import Reexport
 Reexport.@reexport using HybridSystems
-
+Reexport.@reexport import SwitchOnSafety: soslyapb
 
 include("indicator.jl")
 include("automaton_constructor.jl")

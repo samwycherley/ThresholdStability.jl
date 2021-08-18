@@ -51,7 +51,7 @@ end
 """
     CKSVAR_to_TAR(C, Cstar, βtilde, nlags)
 
-Returns 1. a set of matrices corresponding to the CKSVAR model (with censored variable in levels) in TAR form, and 2. a set encoding state-space constraints.
+Returns 1. a set of matrices corresponding to the CKSVAR model (with censored variable in levels) in TVAR form, and 2. a set encoding state-space constraints.
 """
 function CKSVAR_to_TAR(C, Cstar, βtilde, nlags)
     k,= size(C)

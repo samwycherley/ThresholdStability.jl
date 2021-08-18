@@ -20,7 +20,7 @@ function sdplyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, opti
     nA = size(s.resetmaps[1].A, 1)
     nE = size(s.resetmaps[1].X[1], 1)
     nD = size(s.resetmaps[1].X[2], 1)
-    if verbose == 0
+    if verbose ≤ 0
         set_silent(model)
     end
     Q_vrefs = Dict(state => @variable(model, [i=1:nA, j=1:nA]) for state in modes)
