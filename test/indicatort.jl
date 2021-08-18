@@ -30,4 +30,8 @@ B = -5:5
             @test indicator(y, b, indregion=:below, ineq=:strict) == 0
         end
     end
+    @testset "Unknown input error checks" begin
+        @test_throws ErrorException("Unknown indicator region: test") indicator(1, 0, indregion=:test)
+        @test_throws ErrorException("Unknown inequality type: test") indicator(1, 0, ineq=:test)
+    end
 end

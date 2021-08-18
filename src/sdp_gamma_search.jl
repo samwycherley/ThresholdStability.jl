@@ -47,8 +47,6 @@ end
 
 Compute minimum value of ``\\gamma`` for which the SDP is feasible.
 """
-
-
 function sdpbound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
     if optimizer === nothing
         @warn("No optimizer supplied. Trying CSDP...")
@@ -77,5 +75,4 @@ end
 
 Alias for [`bound_γ`](@ref).
 """
-
 sdpbound_gamma(s::StateDepDiscreteSwitchedLinearSystem; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1) = bound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)

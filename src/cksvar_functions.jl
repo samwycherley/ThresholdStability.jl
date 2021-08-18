@@ -53,8 +53,6 @@ end
 
 Returns 1. a set of matrices corresponding to the CKSVAR model (with censored variable in levels) in TAR form, and 2. a set encoding state-space constraints.
 """
-
-
 function CKSVAR_to_TAR(C, Cstar, βtilde, nlags)
     k,= size(C)
     C1s, C2s = atomize_C(C, nlags)
@@ -119,7 +117,6 @@ end
 
 Converts CKSVAR model (with censored variable in levels) into companion form.
 """
-
 function CKSVAR_to_companion(C, Cstar, βtilde, nlags)
     k = size(C,1)
     C1s, C2s = atomize_C(C, nlags)
@@ -157,7 +154,6 @@ end
 
 Converts CKSVAR model estimated with the censored variable entering in first differences into companion form. The default setting `diff=true` returns the companion form with the censored variable entering in first differences. To retrieve the companion form with censored variable entering in levels, set `diff=false`.
 """
-
 function CKSVAR_to_companionFD(F, Fstar, βtilde, nlags; diff=true)
     k = size(F, 1)
     F1s, F2s = atomize_C(F, nlags)

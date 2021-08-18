@@ -51,9 +51,8 @@ end
 """
     sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
 
-Compute minimum value of ``\\gamma`` for which the sum-of-squares program is feasible.
+Compute minimum value of ``γ`` for which the sum-of-squares program is feasible.
 """
-
 function sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
     if optimizer === nothing
         @warn("No optimizer supplied. Trying CSDP...")
@@ -81,6 +80,4 @@ end
 
 Alias for [`sosbound_γ`](@ref).
 """
-
-
 sosbound_gamma(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1) = sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)

@@ -1,3 +1,12 @@
+import ThresholdStability: midpoint, shift
+
+@testset "Midpoints" begin
+      @test midpoint(1, 2, 1) == 1.5
+      @test midpoint(2, 3, 1) == 2.5
+      @test midpoint(Inf, 2., 1.) == 1.
+      @test midpoint(1., Inf, 1.) == 2.
+end
+
 C = [1 2 -3 4 5 6;
      -6 5 4 -3 2 1;
      9 -8 7 6 5 4]
