@@ -15,7 +15,7 @@ export spectral_radius
 
 import Reexport
 Reexport.@reexport using HybridSystems
-Reexport.@reexport import SwitchOnSafety: soslyapb
+Reexport.@reexport using SwitchOnSafety: soslyapb
 
 include("indicator.jl")
 include("automaton_constructor.jl")
