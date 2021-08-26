@@ -1,12 +1,17 @@
+# ## An AR(2) model
+# Here we demonstrate the package's utilities in the context of a simple threshold AR(2) model with two regimes.
+#
+# Consider the model
+# $$\begin{align}
+# y_t^*&=\phi_1^*y_{t-1}^*+\phi_1y_{t-1}+\phi_2^*y_{t-1}^*+\phi_2y_{t-1}+\epsilon_t,\\
+# y_t&=\max\{y_t^*,0\}.
+# \end{align}$$
+# This features a 'positive regime' ($y^*\geq0$) and a 'negative regime' ($y^*<0$).
+##
+# Noting $y_t=\mathbf{1}\{y_t^*\geq0\}y_t^*$, we can rewrite $y_t^*$ as $$y_t^*=(\phi_1^*+\phi_1\mathbf{1}\{y_{t-1}\geq0\})y_{t-1}^*+(\phi_2^*+\phi_2\mathbf{1}\{y_{t-2}\geq0\})y_{t-2}^*+\epsilon_t,$$
+# where $\mathbf{1}\{y\geq0\}$ is an indicator variable.
+##
 using ThresholdStability
-using Plots, Distributions
-using LaTeXStrings
-pyplot()
-
-E1, E2, E3, E4 = [1 0.; 0 1.], [1 0.; 0 -1.], [-1 0.; 0 1.], [-1 0.; 0 -1.]
-D1 = zeros(1,2); D2, D3, D4 = copy(D1), copy(D1), copy(D1)
-X = [[E1, D1], [E2, D2], [E3, D3], [E4, D4]]
-
 
 function AR2_to_TAR(ϕs, ϕ_stars)
     ϕ1, ϕ2 = ϕs
@@ -22,9 +27,28 @@ function AR2_to_TAR(ϕs, ϕ_stars)
         end
     end
     return Vector{Array{Float64, 2}}(Σ)
-    # NOTE Σ is of form where Σ[1] is with yₜ₋₁,yₜ₋₂ ≥ 0, Σ[2] is with yₜ₋₁ ≥ 0 but yₜ₋₂ < 0, Σ[3] is with yₜ₋₁ < 0 but yₜ₋₂ ≥ 0 and Σ[4] is with yₜ₋₁,yₜ₋₂ < 0.
+    # NOTE Σ is of form where Σ[1] is with yₜ₋₁,yₜ₋₂ ≥ 0, Σ[2] is with yₜ₋₁ ≥ 0 and yₜ₋₂ < 0, Σ[3] is with yₜ₋₁ < 0 and yₜ₋₂ ≥ 0
+    # and Σ[4] is with yₜ₋₁,yₜ₋₂ < 0.
 end
-
+##
+# This yields a set of four $2\times2$ matrices, with each matrix corresponding to a different regime pair (positive-positive, positive-negative, negative-positive and negative-negative.)
+#
+# For exposition, consider $\phi_1 = 0.4$, $\phi_1^* = 0.2$, $\phi_2=0.2$, and $\phi_2^*=0.1$:
+##
+Σ4 = AR2_to_TAR([0.4, 0.2], [0.2, 0.1])
+##
+# The state space constraints for this model are
+##
+E1, E2, E3, E4 = [1 0.; 0 1.], [1 0.; 0 -1.], [-1 0.; 0 1.], [-1 0.; 0 -1.]
+D1 = zeros(1,2); D2, D3, D4 = copy(D1), copy(D1), copy(D1)
+X4 = [[E1, D1], [E2, D2], [E3, D3], [E4, D4]]
+##
+# and the automaton can be constructed using
+##
+G4 = automaton_constructor(Σ)
+##
+# Alternatively, by substituting for $y_t$ on the first lag only we can produce a set of two $3\times3$ matrices:
+##
 function AR2_to_companion(ϕs, ϕ_stars)
     ϕ1, ϕ2 = ϕs
     ϕ1_star, ϕ2_star = ϕ_stars
@@ -40,6 +64,36 @@ function AR2_to_companion(ϕs, ϕ_stars)
     # NOTE Σ has form s.t. Σ[1] is with yₜ₋₁ ≥ 0 and Σ[2] is with yₜ₋₁ < 0
 end
 
+Σ2 = AR2_to_companion([0.4, 0.2], [0.2, 0.1])
+Σ2st = [Σ2[1], Σ2[2], Σ2[1], Σ2[2]]
+##
+# `Σ2` consists of the two matrices and `Σ2st` corresponds to the same partitioning of the state space as for `Σ4`.
+#
+# In this latter case, the automaton is again `G` but the state space constraints are now
+##
+E1, E2, E3, E4 = [1 0 0.; 0 1 0.], [1 0 0.; 0 -1 0.], [-1 0 0.; 0 1 0.], [-1 0 0.; 0 -1 0.]
+D1, D2 = [0 1 -1.], [0 1 -1.]; D3, D4 = [0 0 1.], [0 0 1.]
+X2 = [[E1, D1], [E2, D2], [E3, D3], [E4, D4]]
+##
+# and we construct the discrete switched systems
+##
+s2 = discreteswitchedsystem(Σ2)
+s2st = discreteswitchedsystem(Σ2st, G, X2)
+##
+# For our choice of parameter values, this model is stable. In particular, the upper bounds on the joint spectral radius (JSR) of `Σ2`, the constrained joint spectral radius (CJSR) of `(Σ4, G)`, and the state-constrained joint spectral radii (SCJSR) of `(Σ4, G, X4)` and `(Σ2st, G, X2)` all agree in value:
+##
+@show jsr(s2)
+@show cjsr(s4)
+@show sosbound_γ(s, 2)
+##
+# Indeed, if $phi_i,phi_i^*\geq0$ for $i=1,2$, then the model will be stable if and only if
+# $\sum_{i=1}^2(phi_i+phi_i^*)<1$.
+#
+# As expected, the model appears stable when plotted:
+##
+using Plots, Distributions
+using LaTeXStrings
+pyplot()
 function simulate_AR2(y0, Σ, T, σ)  # for companion form
     y = zeros(3, T)
     y[:, 1] = y0
@@ -75,41 +129,47 @@ function plot_AR2(y0, Σ, T, σ; N = 20, row=1)
     plot!(xlabel=L"t", legend=:topright)
 end
 
-# ϕ₁ = 0.4; ϕ₁* = 0.2; ϕ₂ = 0.2; ϕ₂* = 0.1
-Σ = AR2_to_TAR([0.4, 0.2], [0.2, 0.1])
-G = automaton_constructor(Σ)
-s = discreteswitchedsystem(Σ, G, X)
-jsr(s)  # 0.925
-cjsr(s)  # 0.925
-sosbound_γ(s, 2)  # 0.925
+plot_AR2(3*ones(3), Σ, 200, 1)
+plot!(ylabel=L"y^*", yguidefontrotation=-90)
+##
+# Introducing negative parameters, we see that the different upper bounds can diverge.
 
-Σ = AR2_to_companion([0.4, 0.2], [0.2, 0.1])
-jsr(Σ)  # 0.925
+# Consider $\phi_1=0.5$, $\phi_1^*=0.5$, $\phi_2=-0.47$, $\phi_2^*=-0.5$. When plotted, the system appears stable:
+##
+Σ = AR2_to_companion([0.5, -0.47], [0.5, -0.5])
 plot_AR2(3*ones(3), Σ, 200, 1, row=1)
 plot!(ylabel=L"y^*", yguidefontrotation=-90)
-
-
-# ϕ₁ = 0.5; ϕ₁* = 0.5; ϕ₂ = -0.47; ϕ₂* = -0.5
+##
+# However, this is a case where the conservatism of (the upper bounds on) the JSR and CJSR would prevent us from concluding the system is stable.
+##
 Σ = AR2_to_TAR([0.5, -0.47], [0.5, -0.5])
+E1, E2, E3, E4 = [1 0.; 0 1.], [1 0.; 0 -1.], [-1 0.; 0 1.], [-1 0.; 0 -1.]
+D1 = zeros(1,2); D2, D3, D4 = copy(D1), copy(D1), copy(D1)
+X = [[E1, D1], [E2, D2], [E3, D3], [E4, D4]]  # state space constraints
 G = automaton_constructor(Σ)
 s = discreteswitchedsystem(Σ, G, X)
-jsr(s)  # 1.105
-cjsr(s)  # 1.001
-sosbound_γ(s, 2)  # 0.985
-
-Σ = AR2_to_companion([0.5, -0.47], [0.5, -0.5])
-jsr(Σ)  # 1.003
-plot_AR2(3*ones(3), Σ, 200, 1)
+@show jsr(s)  # > 1
+@show cjsr(s)  # > 1
+##
+# However, the upper bound on the SCJSR is less conservative, yielding a bound below 1. We can thus conclude the system is stable.
+##
+sosbound_γ(s, 2)
+##
+# Note that (the upper bound on) the SCJSR remains conservative.
+#
+# For example, consider $\phi_1=\phi_1^*=0.6$ and $\phi_2=\phi_2^*=-0.6$. This appears stable:
+##
+Σ = AR2_to_companion([0.6, 0.6], [-0.6, -0.6])
+plot_AR2(3*ones(3), Σ, 200, 1, row=1)
 plot!(ylabel=L"y^*", yguidefontrotation=-90)
-
-# ϕ₁ = 0.6; ϕ₁* = 0.6; ϕ₂ = -0.6; ϕ₂* = -0.6
-Σ = AR2_to_TAR([0.6, -0.6], [0.6, -0.6])
-G = automaton_constructor(Σ)
+##
+# Plots for other values of $y_0$ follow a similar pattern.
+#
+# However, the bound on the SCJSR exceeds 1 in this case (as does the bound for the CJSR)
+##
+Σ = AR2_to_TAR([0.6, 0.6], [-0.6, -0.6])
 s = discreteswitchedsystem(Σ, G, X)
-jsr(s)  # 1.245
-cjsr(s)  # 1.118
-sosbound_γ(s, 2)  # 1.095
-
-Σ = AR2_to_companion([0.6, -0.6], [0.6, -0.6])
-plot_AR2(3*ones(3), Σ, 200, 1)
-plot!(ylabel=L"y^*", yguidefontrotation=-90)
+@show cjsr(s)
+@show sosbound_γ(s, 2)
+##
+# TODO write as ipynb
