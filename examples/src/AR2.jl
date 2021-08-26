@@ -65,6 +65,7 @@ function AR2_to_companion(ϕs, ϕ_stars)
         push!(Σ, A)
     end
     return Vector{Array{Float64, 2}}(Σ)
+
     # NOTE Σ has form s.t. Σ[1] is with yₜ₋₁ ≥ 0 and Σ[2] is with yₜ₋₁ < 0
 end
 
@@ -72,8 +73,8 @@ end
 Σ2st = [Σ2[1], Σ2[2], Σ2[1], Σ2[2]]
 ##
 # `Σ2` consists of the two matrices and `Σ2st` corresponds to the same partitioning of the state space as for `Σ4`.
-#
-# In this latter case, the automaton is again `G` but the state space constraints are now given by `X2`:
+
+In this latter case, the automaton is again `G` but the state space constraints are now given by `X2`:
 ##
 E1, E2, E3, E4 = [1 0 0.; 0 1 0.], [1 0 0.; 0 -1 0.], [-1 0 0.; 0 1 0.], [-1 0 0.; 0 -1 0.]
 D1, D3 = [0 1 -1.], [0 1 -1.]; D2, D4 = [0 0 1.], [0 0 1.]
@@ -137,7 +138,7 @@ plot_AR2(3*ones(3), Σ2, 200, 1)
 plot!(ylabel=L"y^*", yguidefontrotation=-90)
 ##
 # Introducing negative parameters, we see that the different upper bounds can diverge.
-
+#
 # Consider $\phi_1=0.5$, $\phi_1^*=0.5$, $\phi_2=-0.47$, $\phi_2^*=-0.5$. When plotted, the system appears stable:
 ##
 Σ = AR2_to_companion([0.5, -0.47], [0.5, -0.5])
@@ -167,7 +168,7 @@ s = discreteswitchedsystem(Σ, G, X)
 plot_AR2(3*ones(3), Σ, 200, 1, row=1)
 plot!(ylabel=L"y^*", yguidefontrotation=-90)
 ##
-# Plots for other values of $y_0$ follow a similar pattern.
+# Plots for other initial values $y_0$ follow a similar pattern.
 #
 # However, the bound on the SCJSR exceeds 1 in this case (as does the bound for the CJSR)
 ##
