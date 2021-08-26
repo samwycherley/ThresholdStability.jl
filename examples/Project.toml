@@ -1,0 +1,4 @@
+name = "examples"
+uuid = "39c429bb-bf49-4364-b6e4-4f567fd9c3d8"
+authors = ["Sam Wycherley <samvpwycherley@gmail.com>"]
+version = "0.1.0"
