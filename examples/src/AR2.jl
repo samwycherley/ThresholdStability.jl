@@ -176,5 +176,3 @@ plot!(ylabel=L"y^*", yguidefontrotation=-90)
 s = discreteswitchedsystem(Σ, G, X)
 @show γ_cjsr = cjsr(s)
 @show γ_scjsr = sosbound_γ(s, 2)
-##
-# TODO write as ipynb
