@@ -9,7 +9,7 @@
 #
 # This features a 'positive regime' ($y^*\geq0$) and a 'negative regime' ($y^*<0$).
 ##
-# Noting $y_t=\mathbf{1}\{y_t^*\geq0\}y_t^*$, we can rewrite $y_t^*$ as $$y_t^*=(\phi_1^*+\phi_1\mathbf{1}\{y_{t-1}\geq0\})y_{t-1}^*+(\phi_2^*+\phi_2\mathbf{1}\{y_{t-2}\geq0\})y_{t-2}^*+\epsilon_t,$$
+# Noting $y_t=\mathbf{1}\{y_t^*\geq0\}y_t^*$, we can rewrite the equation for $y_t^*$ as $$y_t^*=(\phi_1^*+\phi_1\mathbf{1}\{y_{t-1}\geq0\})y_{t-1}^*+(\phi_2^*+\phi_2\mathbf{1}\{y_{t-2}\geq0\})y_{t-2}^*+\epsilon_t,$$
 # where $\mathbf{1}\{y\geq0\}$ is an indicator variable.
 ##
 using ThresholdStability
