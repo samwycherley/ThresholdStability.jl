@@ -1,6 +1,6 @@
 # CKSVAR models
 
-[ThresholdStability.jl](https://github.com/samwycherley/ThresholdStability.jl) includes tools to convert censored and kinked structural vector autoregressive ([CKSVAR](https://arxiv.org/abs/2103.12779)) models into TVAR models.
+[ThresholdStability.jl](https://github.com/samwycherley/ThresholdStability.jl) includes tools to convert censored and kinked structural vector autoregressive (CKSVAR) models into TVAR models. Information on CKSVAR models is available in [Mavroeidis (2021)](https://arxiv.org/abs/2103.12779).
 
 Ox code to estimate CKSVAR models is available [here](https://drive.google.com/file/d/18616WKrloMiGd3x8140f-Fk8u29na6Qb/view?usp=sharing).
 

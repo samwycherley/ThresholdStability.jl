@@ -13,20 +13,20 @@ const AbstractSwitchedSystem = Union{DiscreteSwitchedLinearSystem, ConstrainedDi
 """
     spectral_radius(A::AbstractMatrix)
 
-Calculates the spectral radius of matrix `A`, using a utility from [SwitchOnSafety.jl](https://github.com/blegat/SwitchOnSafety.jl).
+Calculates the spectral radius of matrix `A`.
 """
 spectral_radius(A::AbstractMatrix) = ρ(A)  # from SwitchOnSafety.jl
 
 include("conversion.jl")
 
 """
-    jsr(Σ::AbstractVector{<:AbstractMatrix})
+    jsr(Σ::AbstractVector{<:AbstractMatrix}; d = 2)
 
-Calculates an upper bound on the joint spectral radius of a set of matrices `Σ`, using a utility from [SwitchOnSafety.jl](https://github.com/blegat/SwitchOnSafety.jl).
+Calculates an upper bound on the joint spectral radius of a set of matrices `Σ`.
 
-    jsr(s::AbstractSwitchedSystem)
+    jsr(s::AbstractSwitchedSystem; d = 2)
 
-Calculates an upper bound on the joint spectral radius for the switched linear system `s`, using a utility from [SwitchOnSafety.jl](https://github.com/blegat/SwitchOnSafety.jl).
+Calculates an upper bound on the joint spectral radius for the switched linear system `s`.
 """
 jsr(Σ::AbstractVector{<:AbstractMatrix}; d = 2, optimizer = optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true)) = soslyapb(discreteswitchedsystem(Σ), d, optimizer_constructor = optimizer)[2]
 jsr(s::AbstractSwitchedSystem; d = 2, optimizer = optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true)) = soslyapb(unconstrained(unstatedep(s)), d, optimizer_constructor = optimizer)[2]
@@ -34,7 +34,11 @@ jsr(s::AbstractSwitchedSystem; d = 2, optimizer = optimizer_with_attributes(CSDP
 """
     cjsr(Σ::AbstractVector{<:AbstractMatrix}, G::AbstractAutomaton; d = 2)
 
-Calculates an upper bound on the constrained joint spectral radius of a switching system `(Σ, G)`, using a utility from [SwitchOnSafety.jl](https://github.com/blegat/SwitchOnSafety.jl).
+Calculates an upper bound on the constrained joint spectral radius of the constrained switched system `(Σ, G)`.
+
+    cjsr(s::AbstractSwitchedSystem; d = 2)
+
+Calculates an upper bound on the constrained joint spectral radius of the switched system `s`.
 """
 
 cjsr(Σ::AbstractVector{<:AbstractMatrix}, G::AbstractAutomaton; d = 2, optimizer = optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true)) = soslyapb(discreteswitchedsystem(Σ, G), d, optimizer_constructor = optimizer)[2]
