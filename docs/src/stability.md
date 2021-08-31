@@ -1,12 +1,14 @@
 # Stability
 
 ## Motivation
-Let ``\{\mathscr{X}_\sigma\}_{\sigma=1}^m`` be a partition of state space ``\mathscr{X}\subseteq\mathbb{R}^p`` s.t. each ``\mathscr{X}_\sigma`` takes the form of a convex polyhedron, ```math
+Let ``\{\mathscr{X}_\sigma\}_{\sigma=1}^m`` be a partition of state space ``\mathscr{X}\subseteq\mathbb{R}^p`` s.t. each ``\mathscr{X}_\sigma`` takes the form of a convex polyhedron,
+```math
 \mathscr{X}_\sigma=\{x\in\mathbb{R}^p\mid E_\sigma x\geq_* 0, D_\sigma x=0\},
 ```
 where the inequality ``\geq_*`` may be strict or weak.
 
-The tools in [ThresholdStability.jl](https://github.com/samwycherley/ThresholdStability.jl) are intended to determine whether a discrete-time model of form ```math
+The tools in [ThresholdStability.jl](https://github.com/samwycherley/ThresholdStability.jl) are intended to determine whether a discrete-time model of form
+```math
 \begin{align}x_{t+1}&=\Phi(x_t)x_t\\
 &:=\sum_{\sigma=1}^mA_\sigma\mathbf{1}\{x_t\in\mathscr{X}_\sigma\}x_t\end{align}
 ```

@@ -40,7 +40,6 @@ Calculates an upper bound on the constrained joint spectral radius of the constr
 
 Calculates an upper bound on the constrained joint spectral radius of the switched system `s`.
 """
-
 cjsr(Σ::AbstractVector{<:AbstractMatrix}, G::AbstractAutomaton; d = 2, optimizer = optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true)) = soslyapb(discreteswitchedsystem(Σ, G), d, optimizer_constructor = optimizer)[2]
 cjsr(s::AbstractSwitchedSystem; d = 2, optimizer = optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true)) = soslyapb(unstatedep(s), 2, optimizer_constructor = optimizer)[2]
 
