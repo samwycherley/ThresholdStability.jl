@@ -15,7 +15,7 @@ makedocs(
     pages=[
         "Home" => "index.md",
 #        "Stability" => "stability.md"
-#        "CKSVAR" => "cksvar.md"
+        "CKSVAR" => "cksvar.md"
     ],
 )
 

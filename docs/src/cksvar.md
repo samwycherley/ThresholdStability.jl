@@ -20,4 +20,19 @@ perms
 automaton_constructor
 ```
 
-Automata can also be constructed manually using [HybridSystems.jl](https://github.com/blegat/HybridSystems.jl).
+Automata can also be constructed manually using [HybridSystems.jl](https://github.com/blegat/HybridSystems.jl), which ThresholdStability re-exports.
+
+For example, the following code constructs an automaton with three states, loops at states 1 and 3, and edges from states 1 to 2, 2 to 3, and 3 to 1, with the tail node indices as labels.
+```jldoctest
+G = LightAutomaton(3)  # initializes automaton with 3 states as an edgeless graph
+add_transition!(G, 1, 1, 1)
+add_transition!(G, 1, 2, 1)  # adds edge from state 1 to 2, with label 1
+add_transition!(G, 2, 3, 2)
+add_transition!(G, 3, 3, 3)
+add_transition!(G, 3, 1, 3)
+G
+
+# output
+
+LightAutomaton{LightGraphs.SimpleGraphs.SimpleDiGraph{Int64},LightGraphs.SimpleGraphs.SimpleEdge{Int64}}({3, 5} directed simple Int64 graph, Dict{LightGraphs.SimpleGraphs.SimpleEdge{Int64},Dict{Int64,Int64}}(Edge 3 => 3 => Dict(4 => 3),Edge 1 => 1 => Dict(1 => 1),Edge 3 => 1 => Dict(5 => 3),Edge 1 => 2 => Dict(2 => 1),Edge 2 => 3 => Dict(3 => 2)), 5, 5)
+```
