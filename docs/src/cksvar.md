@@ -24,6 +24,8 @@ Automata can also be constructed manually using [HybridSystems.jl](https://githu
 
 For example, the following code constructs an automaton with three states, loops at states 1 and 3, and edges from states 1 to 2, 2 to 3, and 3 to 1, with the tail node indices as labels.
 ```jldoctest
+using ThresholdStability
+
 G = LightAutomaton(3)  # initializes automaton with 3 states as an edgeless graph
 add_transition!(G, 1, 1, 1)
 add_transition!(G, 1, 2, 1)  # adds edge from state 1 to 2, with label 1
