@@ -10,7 +10,7 @@ makedocs(
     ),
     pages=[
         "Home" => "index.md",
-        "Stability" => "stability.md"
+        "Stability" => "stability.md",
         "CKSVAR" => "cksvar.md"
     ],
 )

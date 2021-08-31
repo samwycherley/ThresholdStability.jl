@@ -38,3 +38,9 @@ G
 
 LightAutomaton{LightGraphs.SimpleGraphs.SimpleDiGraph{Int64}, LightGraphs.SimpleGraphs.SimpleEdge{Int64}}({3, 5} directed simple Int64 graph, Dict{LightGraphs.SimpleGraphs.SimpleEdge{Int64}, Dict{Int64, Int64}}(Edge 1 => 2 => Dict(2 => 1), Edge 3 => 1 => Dict(5 => 3), Edge 1 => 1 => Dict(1 => 1), Edge 3 => 3 => Dict(4 => 3), Edge 2 => 3 => Dict(3 => 2)), 5, 5)
 ```
+
+## Indicator function
+`indicator` can be used in building functions to convert models to TVAR form. Examples: [AR(2)](https://github.com/samwycherley/ThresholdStability.jl/blob/master/examples/src/AR2.ipynb). 
+```@docs
+indicator
+```
