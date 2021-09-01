@@ -1,5 +1,5 @@
-# An AR(2) model
-# Here we demonstrate the package's utilities in the context of a simple threshold AR(2) model with two regimes.
+# A CKAR(2) model
+# Here we demonstrate the package's utilities in the context of a simple censored and kinked AR(2) model with two regimes.
 #
 # Consider the model
 # $$\begin{align}
