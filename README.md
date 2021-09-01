@@ -4,3 +4,41 @@
 [![Build Status](https://github.com/samwycherley/ThresholdStability.jl/workflows/CI/badge.svg)](https://github.com/samwycherley/ThresholdStability.jl/actions)
 [![Build Status](https://travis-ci.com/samwycherley/ThresholdStability.jl.svg?branch=master)](https://travis-ci.com/samwycherley/ThresholdStability.jl)
 [![Coverage](https://codecov.io/gh/samwycherley/ThresholdStability.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/samwycherley/ThresholdStability.jl)
+
+A Julia package implementing techniques to determine the stability of discrete-time threshold vector autoregressive (TVAR) models such as censored and kinked vector autoregressive models (CKSVAR).
+
+## Resources
+- Documentation: <https://samwycherley.github.io/ThresholdStability.jl/dev/>.
+- Examples: examples, including notebooks, are contained in the [examples/src folder](https://github.com/samwycherley/ThresholdStability.jl/tree/master/examples/src).
+
+## Installation
+ThresholdStability.jl requires Julia v1.0 or later. Julia can be downloaded [here](https://julialang.org/downloads/).
+
+To install, use
+```julia
+Pkg.add("ThresholdStability")
+```
+or from the REPL, type
+```julia
+] add ThresholdStability
+```
+
+To test the package once installed, use
+```julia
+Pkg.test("ThresholdStability")
+```
+or from the REPL,
+```julia
+] test ThresholdStability
+```
+
+## Dependencies
+The package relies on a number of other packages, most importantly
+- [HybridSystems.jl](https://github.com/blegat/HybridSystems.jl)
+- [SwitchOnSafety.jl](https://github.com/blegat/SwitchOnSafety.jl)
+- [MathematicalSystems.jl](https://github.com/JuliaReach/MathematicalSystems.jl)
+- [SumOfSquares.jl](https://github.com/jump-dev/SumOfSquares.jl)
+
+All dependent packages are automatically installed when installing ThresholdStability.
+
+For troubleshooting, consulting the documentation of these packages may be helpful, in addition to the [documentation for ThresholdStability.jl](https://samwycherley.github.io/ThresholdStability.jl/dev/).
