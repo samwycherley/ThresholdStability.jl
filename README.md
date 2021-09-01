@@ -31,6 +31,7 @@ or from the REPL,
 ```julia
 ] test ThresholdStability
 ```
+Testing before use is recommended.
 
 ## Dependencies
 The package relies on a number of other packages, most importantly
