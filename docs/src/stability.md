@@ -98,7 +98,7 @@ As in [Parillo and Jadbabaie, 2008](https://arxiv.org/abs/0712.2887), let ``x^{[
 ```math
 \begin{aligned}
 y^TQ_iy-(E_i^{[d]}y)^TU_iE_i^{[d]}y+(D_i^{[d]}y)^TZ_iD_i^{[d]}y-y^Ty&\enskip\text{ is SOS}\qquad\text{for }i=1,\dots,m,\\
-\gamma^{2d}y^TQ_iy+(A_\sigma^{[d]}y)^TQ_jA_\sigma^{[d]}y\qquad\qquad&\\
+\gamma^{2d}y^TQ_iy-(A_\sigma^{[d]}y)^TQ_jA_\sigma^{[d]}y\qquad\qquad&\\
 -(E_i^{[d]}y)^TU_{ij}^{[d]}E_i^{[d]}y + (D_i^{[d]}y)^TZ_{ij}D_i^{[d]}y &\enskip\text{ is SOS}\qquad\text{for }(i,j,\sigma)\in G,
 \end{aligned}
 ```
