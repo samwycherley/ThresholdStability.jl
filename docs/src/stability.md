@@ -97,9 +97,9 @@ The upper bound on the SCJSR found using [`sosbound_γ`](@ref) is generally less
 As in [Parillo and Jadbabaie, 2008](https://arxiv.org/abs/0712.2887), let ``x^{[d]}`` denote the ``d``-lift of vector ``x`` and let ``A^{[d]}`` be defined as the matrix such that ``(Ax)^{[d]}=A^{[d]}x^{[d]}``. Let ``y=x^{[d]}``. Now, [`sosbound_γ`](@ref) involves finding ``\gamma`` that minimizes
 ```math
 \begin{aligned}
-y^tQ_iy-(E_i^{[d]}y)^TU_iE_i^{[d]}y+(D_i^{[d]}y)^TZ_iD_i^{[d]}y-y^Ty&\text{ is SOS}\qquad\text{for }i=1,\dots,m,\\
-\gamma^{2d}y^TQ_iy=(A_\sigma^{[d]}y)^TQ_jA_\sigma^{[d]}y&\\
-\qquad-(E_i^{[d]}y)^TU_{ij}^{[d]}E_i^{[d]}y+(D_i^{[d]}y)^TZ_{ij}D_i^{[d]}y&\text{ is SOS}\qquad\text{for }(i,j,\sigma)\in G,
+y^TQ_iy-(E_i^{[d]}y)^TU_iE_i^{[d]}y+(D_i^{[d]}y)^TZ_iD_i^{[d]}y-y^Ty&\enskip\text{ is SOS}\qquad\text{for }i=1,\dots,m,\\
+\gamma^{2d}y^TQ_iy+(A_\sigma^{[d]}y)^TQ_jA_\sigma^{[d]}y\qquad\qquad&\\
+-(E_i^{[d]}y)^TU_{ij}^{[d]}E_i^{[d]}y + (D_i^{[d]}y)^TZ_{ij}D_i^{[d]}y &\enskip\text{ is SOS}\qquad\text{for }(i,j,\sigma)\in G,
 \end{aligned}
 ```
 where ``U_i\geq0``, ``U_{ij}\geq0``, ``Z_i\succ0`` and ``Z_{ij}\succ0``.
