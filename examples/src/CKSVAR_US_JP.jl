@@ -9,12 +9,12 @@
 #
 # Converting this model into TAR form, we determine upper bounds on the state-constrained joint spectral radius (SCJSR)
 ##
-using DataFrames, DataFramesMeta, CSV
+using DataFrames, DataFramesMeta, CSV, HTTP
 using ThresholdStability
 
 extract_est(parname, df) = @subset(df, in([parname]).(:Parameter)).:Estimate[1]
 
-JP = CSV.read("./estimates/estimates_JP.csv", DataFrame, copycols=true)  # Japan data from CSV
+JP = CSV.read(HTTP.get("https://raw.githubusercontent.com/samwycherley/ThresholdStability.jl/master/examples/src/estimates/estimates_JP.csv").body, DataFrame, copycols=true)  # Japan data from CSV
 
 JPβtilde = zeros(2)
 for i in 1:2
@@ -57,7 +57,7 @@ s_JP = discreteswitchedsystem(Σ_JP, G_JP, X_JP)
 #
 # Because the Federal Funds Rate enters in first differences, the SCJSR is no longer appropriate, since `Σ` is now a continuum of matrices. Instead we rely on the joint spectral radius.
 ##
-USfd = CSV.read("./estimates/estimates_US-fd.csv", DataFrame, copycols=true)  # US data from CSV
+USfd = CSV.read(HTTP.get("https://raw.githubusercontent.com/samwycherley/ThresholdStability.jl/master/examples/src/estimates/estimates_US-fd.csv").body, DataFrame, copycols=true)  # US data from CSV
 
 USfdβtilde = zeros(2)
 for i in 1:2
