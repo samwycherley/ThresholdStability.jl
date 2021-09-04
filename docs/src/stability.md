@@ -9,8 +9,8 @@ where the inequality ``\geq_*`` may be strict or weak.
 
 The tools in [ThresholdStability.jl](https://github.com/samwycherley/ThresholdStability.jl) are intended to determine whether a discrete-time model of form
 ```math
-\begin{align}x_{t+1}&=\Phi(x_t)x_t\\
-&:=\sum_{\sigma=1}^mA_\sigma\mathbf{1}\{x_t\in\mathscr{X}_i\}x_t\end{align}
+\begin{aligned}x_{t+1}&=\Phi(x_t)x_t\\
+&:=\sum_{\sigma=1}^mA_\sigma\mathbf{1}\{x_t\in\mathscr{X}_i\}x_t\end{aligned}
 ```
 is asymptotically stable, where ``\mathbf{1}\{x\in\mathscr{X}_i\}`` is an indicator function and ``A_i`` are given ``p\times p`` matrices.
 
@@ -94,7 +94,7 @@ is feasible, where ``U_i\geq0``, ``U_{ij}\geq0``, ``Z_i\succ0`` and ``Z_{ij}\suc
 ### SOS program
 The upper bound on the SCJSR found using [`sosbound_γ`](@ref) is generally less conservative than that found by [`sdpbound_γ`](@ref); [`sosbound_γ`](@ref) is thus recommended.
 
-As in [Parillo and Jadbabaie, 2008](https://arxiv.org/abs/0712.2887), let ``x^{[d]}`` denote the ``d``-lift of vector ``x`` and let ``A^{[d]}`` be defined as the matrix such that ``(Ax)^{[d]}=A^{[d]}x^{[d]}``. Let ``y=x^{[d]}``. Now, [`sosbound_γ`](@ref) involves finding ``\gamma`` that minimizes
+As in [Parillo and Jadbabaie (2008)](https://arxiv.org/abs/0712.2887), let ``x^{[d]}`` denote the ``d``-lift of vector ``x`` and let ``A^{[d]}`` be defined as the matrix such that ``(Ax)^{[d]}=A^{[d]}x^{[d]}``. Let ``y=x^{[d]}``. Now, [`sosbound_γ`](@ref) involves finding ``\gamma`` that minimizes
 ```math
 \begin{aligned}
 y^TQ_iy-(E_i^{[d]}y)^TU_iE_i^{[d]}y+(D_i^{[d]}y)^TZ_iD_i^{[d]}y-y^Ty&\enskip\text{ is SOS}\qquad\text{for }i=1,\dots,m,\\
