@@ -69,4 +69,4 @@ end
 
 Alias for [`sdpbound_γ`](@ref).
 """
-sdpbound_gamma(s::StateDepDiscreteSwitchedLinearSystem; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1) = bound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)
+sdpbound_gamma(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true), tol=1e-5, verbose=0, initstep=1.1) = sdpbound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)
