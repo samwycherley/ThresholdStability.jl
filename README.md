@@ -10,7 +10,7 @@ A Julia package implementing techniques to determine the stability of discrete-t
 ## Resources
 - Documentation: <https://samwycherley.github.io/ThresholdStability.jl/dev/>.
 - Examples: examples, including notebooks, are contained in the [examples/src folder](https://github.com/samwycherley/ThresholdStability.jl/tree/master/examples/src).
-- `R` wrapper for this package: <https://github.com/samwycherley/thresholdr>
+- R wrapper for this package: <https://github.com/samwycherley/thresholdr>
 ## Installation
 ThresholdStability.jl requires Julia v1.0 or later. Julia can be downloaded [here](https://julialang.org/downloads/).
 
