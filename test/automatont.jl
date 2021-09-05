@@ -32,4 +32,6 @@ add_transition!(G, 4, 4, 4)
         Σn = [randn(2,2) for _ in 1:2^n]
         @test automaton_constructor(Σn) ≈ automaton_constructor(Σn, perms(n))
     end
+    @test islight(G) == true
+    @test islight(OneStateAutomaton(2)) == false
 end

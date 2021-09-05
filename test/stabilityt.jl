@@ -24,13 +24,17 @@ G3 = automaton_constructor(Σ3)
 s3 = discreteswitchedsystem(Σ3, G3, X)
 
 γsdp1 = sdpbound_γ(s1)
+gammasdp1 = sdpbound_gamma(s1)
 γsos1 = sosbound_γ(s1, 2)
+gammasos1 = sosbound_gamma(s1, 2)
 γsdp2 = sdpbound_γ(s2, optimizer=optim, verbose=2)
 γsos2 = sosbound_γ(s2, 2, optimizer=optim, verbose=2)
 γsdp3 = sdpbound_γ(s3, optimizer=optim, verbose=4)
 γsos3 = sosbound_γ(s3, 2, optimizer=optim, verbose=4)
 
 @testset "SDP program" begin
+    @test γsdp1 == gammasdp1
+    @test γsos1 == gammasos1
     @test (γsdp1 ≥ 2 && γsdp1 ≤ 2.1)
     @test (γsdp2 ≥ 1.1 && γsdp2 ≤ 1.2)
     @test (γsdp3 ≥ 3.1 && γsdp3 ≤ 3.2)
