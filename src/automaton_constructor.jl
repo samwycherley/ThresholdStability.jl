@@ -1,5 +1,5 @@
-export perms, automaton_constructor
-
+export perms, automaton_constructor, islight
+using LightGraphs
 """
     perms(p)
 
@@ -51,3 +51,23 @@ function automaton_constructor(Σ::AbstractVector{<:AbstractMatrix}, seqlist)
     end
     return G
 end
+
+function HybridSystems.event(A::AbstractAutomaton) end
+
+function HybridSystems.event(A::LightAutomaton, q, r)
+    if has_transition(A, q, r)
+        if length(A.Σ[Edge(q, r)]) > 1
+            @warn "Edge associated with more than one label! Reporting first label only."
+        end
+        return collect(values(A.Σ[Edge(q, r)]))[1]
+    end
+    nothing
+end
+
+function HybridSystems.event(A::OneStateAutomaton, q, r)
+    @assert q == 1
+    @assert r == 1
+    collect(1:A.nt)
+end
+
+islight(A::AbstractAutomaton) = typeof(A) <: LightAutomaton
