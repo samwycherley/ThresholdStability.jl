@@ -5,6 +5,7 @@ import ThresholdStability: midpoint, shift
       @test midpoint(2, 3, 1) == 2.5
       @test midpoint(Inf, 2., 1.) == 1.
       @test midpoint(1., Inf, 1.) == 2.
+      @test midpoint(Inf, Inf, 1.) == 0.
 end
 
 C = [1 2 -3 4 5 6;
