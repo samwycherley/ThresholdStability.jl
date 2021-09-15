@@ -49,20 +49,17 @@ end
 
 
 """
-    sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
+    sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d)
 
-Compute minimum value of ``\\gamma`` for which the sum-of-squares program is feasible.
+Compute minimum value of ``γ`` for which the sum-of-squares program is feasible.
+
+# Keywords
+- `optimizer=...`: choose an SDP solver. The default solver is CSDP.
+- `tol=...`: set tolerance. The default is `tol=1e-5`.
+- `verbose=...`: set level of detail reported during calculation process. The default is `verbose=0`.
+- `initstep=...`: set initial step size. The default value is `initstep=1.1`.
 """
-
-function sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
-    if optimizer === nothing
-        @warn("No optimizer supplied. Trying CSDP...")
-        try
-            optimizer = CSDP.Optimizer
-        catch err
-            @error("CSDP.Optimizer not found. Please supply an optimizer or install/rebuild CSDP.")
-        end
-    end
+function sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true), tol=1e-5, verbose=0, initstep=1.1)
     lo_init, hi_init = 0, initstep; hi_stat = (MOI.INFEASIBLE, MOI.INFEASIBLE_POINT, MOI.INFEASIBILITY_CERTIFICATE, "")
     while isinfeasible(hi_stat, true)
         hi_stat = soslyap_feasible_prog(hi_init, s, d, optimizer, verbose=verbose-1)
@@ -81,6 +78,4 @@ end
 
 Alias for [`sosbound_γ`](@ref).
 """
-
-
-sosbound_gamma(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1) = sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)
+sosbound_gamma(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true), tol=1e-5, verbose=0, initstep=1.1) = sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)

@@ -8,7 +8,7 @@ function midpoint(lo, hi, step)
     elseif isfinite(hi)
         return hi - step
     end
-    0
+    0.
 end
 
 
