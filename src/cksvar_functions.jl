@@ -51,10 +51,8 @@ end
 """
     CKSVAR_to_TAR(C, Cstar, βtilde, nlags)
 
-Returns 1. a set of matrices corresponding to the CKSVAR model (with censored variable in levels) in TAR form, and 2. a set encoding state-space constraints.
+Returns pair `(Σ, X)` where `Σ` is a set of matrices corresponding to the CKSVAR model (with censored variable in levels) in TVAR form, and `X` is a set encoding state-space constraints.
 """
-
-
 function CKSVAR_to_TAR(C, Cstar, βtilde, nlags)
     k,= size(C)
     C1s, C2s = atomize_C(C, nlags)
@@ -105,11 +103,11 @@ function CKSVAR_to_TAR(C, Cstar, βtilde, nlags)
         push!(Ds, D)
     end
     for i in 1:length(vals)
-        X = [Es[i], Ds[i]]
+        X = Vector([Es[i], Ds[i]])
         push!(Xs, X)
     end
 
-    Vector{Array{Float64, 2}}(Σ), Xs
+    Vector{Array{Float64, 2}}(Σ), Vector(Xs)
     # NOTE the ordering of the matrices in Σ
 end
 
@@ -119,7 +117,6 @@ end
 
 Converts CKSVAR model (with censored variable in levels) into companion form.
 """
-
 function CKSVAR_to_companion(C, Cstar, βtilde, nlags)
     k = size(C,1)
     C1s, C2s = atomize_C(C, nlags)
@@ -157,8 +154,7 @@ end
 
 Converts CKSVAR model estimated with the censored variable entering in first differences into companion form. The default setting `diff=true` returns the companion form with the censored variable entering in first differences. To retrieve the companion form with censored variable entering in levels, set `diff=false`.
 """
-
-function CKSVAR_to_companionFD(F, Fstar, βtilde, nlags; diff=true)
+function CKSVAR_to_companionFD(F, Fstar, βtilde, nlags; diff = true)
     k = size(F, 1)
     F1s, F2s = atomize_C(F, nlags)
     Fs = reshape(hcat(F1s, F2s), (nlags, 2, 2))  # index notation is Fs[lag, rhsvariable, lhsvariable]
