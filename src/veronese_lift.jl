@@ -1,7 +1,6 @@
 import SwitchOnSafety: veroneselift
 import Base: copy
 
-const AbstractSwitchedSystem = Union{DiscreteSwitchedLinearSystem, ConstrainedDiscreteSwitchedLinearSystem, StateDepDiscreteSwitchedLinearSystem}
 
 copy(Lmap::LinearMap) = LinearMap(copy(Lmap.A))
 
