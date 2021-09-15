@@ -43,21 +43,13 @@ end
 
 
 """
-    sdpbound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
+    sdpbound_γ(s::StateDepDiscreteSwitchedLinearSystem)
 
 Compute minimum value of ``\\gamma`` for which the SDP is feasible.
+
+For keywords, see [`sosbound_γ`](@ref)
 """
-
-
-function sdpbound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
-    if optimizer === nothing
-        @warn("No optimizer supplied. Trying CSDP...")
-        try
-            optimizer = CSDP.Optimizer
-        catch err
-            @error("CSDP.Optimizer not found. Please supply an optimizer or install/rebuild CSDP.")
-        end
-    end
+function sdpbound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true), tol=1e-5, verbose=0, initstep=1.1)
     lo_init, hi_init = 0, initstep; hi_stat = (MOI.INFEASIBLE, MOI.INFEASIBLE_POINT, MOI.INFEASIBILITY_CERTIFICATE, "")
     while isinfeasible(hi_stat, true)
         hi_stat = sdplyap_feasible_prog(hi_init, s, optimizer, verbose=verbose-1)
@@ -75,7 +67,6 @@ end
 """
     sdpbound_gamma(s::StateDepDiscreteSwitchedLinearSystem; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1)
 
-Alias for [`bound_γ`](@ref).
+Alias for [`sdpbound_γ`](@ref).
 """
-
-sdpbound_gamma(s::StateDepDiscreteSwitchedLinearSystem; optimizer=nothing, tol=1e-5, verbose=0, initstep=1.1) = bound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)
+sdpbound_gamma(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true), tol=1e-5, verbose=0, initstep=1.1) = sdpbound_γ(s::StateDepDiscreteSwitchedLinearSystem; optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)
