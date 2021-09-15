@@ -4,11 +4,15 @@ CurrentModule = ThresholdStability
 
 # ThresholdStability
 
-Documentation for [ThresholdStability](https://github.com/samwycherley/ThresholdStability.jl).
+[ThresholdStability.jl](https://github.com/samwycherley/ThresholdStability.jl) is a package implementing techniques to determine the stability of discrete-time threshold vector autoregressive (TVAR) models.
 
-```@index
+
+## Contents
+```@contents
+Pages = ["cksvar.md", "stability.md"]
+Depth = 2
 ```
 
-```@autodocs
-Modules = [ThresholdStability]
+## Index
+```@index
 ```
