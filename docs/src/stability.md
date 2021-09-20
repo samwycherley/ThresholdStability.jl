@@ -29,7 +29,7 @@ jsr
 cjsr
 ```
 
-The `jsr` function applied to a state-dependent switched system `(\Sigma, G, X)` or a constrained switched system `(\Sigma, G)` ignores the state-space constraints and automaton and reports the JSR of `\Sigma`. Likewise, the `cjsr` function applied to a state-dependent switched system ignores the state-space constraints. Applying the `cjsr` function to an unconstrained system is equivalent to applying `jsr`.
+The `jsr` function applied to a state-dependent switched system ``(\Sigma, G, X)`` or a constrained switched system ``(\Sigma, G)`` ignores the state-space constraints and automaton and reports the JSR of ``\Sigma``. Likewise, the `cjsr` function applied to a state-dependent switched system ignores the state-space constraints. Applying the `cjsr` function to an unconstrained system is equivalent to applying `jsr`.
 
 For information on how to construct switched systems `s`, please see the [HybridSystems documentation](https://blegat.github.io/HybridSystems.jl/stable/lib/methods/#Switched-Systems-1) or see the [examples/src folder](https://github.com/samwycherley/ThresholdStability.jl/tree/master/examples/src).
 
