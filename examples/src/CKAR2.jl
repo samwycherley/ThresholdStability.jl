@@ -74,7 +74,7 @@ end
 ##
 # `Σ2` consists of the two matrices and `Σ2st` corresponds to the same partitioning of the state space as for `Σ4`.
 
-In this latter case, the automaton is again `G` but the state space constraints are now given by `X2`:
+# In this latter case, the automaton is again `G` but the state space constraints are now given by `X2`:
 ##
 E1, E2, E3, E4 = [1 0 0.; 0 1 0.], [1 0 0.; 0 -1 0.], [-1 0 0.; 0 1 0.], [-1 0 0.; 0 -1 0.]
 D1, D3 = [0 1 -1.], [0 1 -1.]; D2, D4 = [0 0 1.], [0 0 1.]
