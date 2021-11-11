@@ -22,7 +22,7 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 [compat]
 CSDP = "0.7"
 Combinatorics = "1"
-DynamicPolynomials = "0.3"
+DynamicPolynomials = "0.3, 0.4"
 HybridSystems = "0.3"
 JuMP = "0.21"
 LightGraphs = "1"
