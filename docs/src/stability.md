@@ -19,7 +19,7 @@ Sufficient conditions for asymptotic stability, in descending order of conservat
 - the _constrained joint spectral radius_ (CJSR) of the constrained switched linear system ``(\Sigma, G)``, where ``G`` is an automaton describing the possible transitions between states, is strictly less than 1;
 - the '_state-constrained joint spectral radius_' (SCJSR) of the state-dependent switched linear system ``(\Sigma, G, \{\mathscr{X}_i\})`` is strictly less than 1.
 
-In general, exact computation of the JSR, CJSR and SCJSR are NP-hard, but can be efficiently approximated via semidefinite programming or sum-of-squares programming (see e.g. [Parillo and Jadbabaie, 2008](https://arxiv.org/abs/0712.2887)).
+In general, exact computation of the JSR, CJSR and SCJSR is NP-hard, but can be efficiently approximated via semidefinite programming or sum-of-squares programming (see e.g. [Parillo and Jadbabaie, 2008](https://arxiv.org/abs/0712.2887)).
 
 ## JSR and CJSR
 We provide functions to compute tight upper bounds on the JSR and CJSR and to compute the spectral radius of individual matrices, each based on utilities from [SwitchOnSafety.jl](https://github.com/blegat/SwitchOnSafety.jl).
@@ -29,7 +29,7 @@ jsr
 cjsr
 ```
 
-The `jsr` function applied to a state-dependent switched system `(\Sigma, G, X)` or a constrained switched system `(\Sigma, G)` ignores the state-space constraints and automaton and reports the JSR of `\Sigma`. Likewise, the `cjsr` function applied to a state-dependent switched system ignores the state-space constraints. Applying the `cjsr` function to an unconstrained system is equivalent to applying `jsr`.
+The `jsr` function applied to a state-dependent switched system ``(\Sigma, G, X)`` or a constrained switched system ``(\Sigma, G)`` ignores the state-space constraints and automaton and reports the JSR of ``\Sigma``. Likewise, the `cjsr` function applied to a state-dependent switched system ignores the state-space constraints. Applying the `cjsr` function to an unconstrained system is equivalent to applying `jsr`.
 
 For information on how to construct switched systems `s`, please see the [HybridSystems documentation](https://blegat.github.io/HybridSystems.jl/stable/lib/methods/#Switched-Systems-1) or see the [examples/src folder](https://github.com/samwycherley/ThresholdStability.jl/tree/master/examples/src).
 
