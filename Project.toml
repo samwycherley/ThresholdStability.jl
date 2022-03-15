@@ -30,7 +30,7 @@ MathematicalSystems = "0.11"
 MultivariatePolynomials = "0.3, 0.4"
 Reexport = "0.2, 1"
 SumOfSquares = "0.4, 0.5, 0.6"
-SwitchOnSafety = "0.1"
+SwitchOnSafety = "0.1, 0.2"
 julia = "1"
 
 [extras]
