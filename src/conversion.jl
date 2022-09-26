@@ -23,10 +23,11 @@ end
 
 function unconstrained(s::AbstractSwitchedSystem)
     if typeof(s) <: ConstrainedDiscreteSwitchedLinearSystem
-        s = HybridSystem(OneStateAutomaton(nstates(s.automaton)), s.modes, s.resetmaps, s.switchings)
+        s = HybridSystem(OneStateAutomaton(nstates(s.automaton)), s.modes, s.resetmaps, 
+            s.switchings)
     elseif typeof(s) <: StateDepDiscreteSwitchedLinearSystem
         n = nstates(s.automaton)
-        G = LightAutomaton(n)
+        G = GraphAutomaton(n)
         for σ in 1:n
             for σnext in 1:n
                 add_transition!(G, σ, σnext, σ)

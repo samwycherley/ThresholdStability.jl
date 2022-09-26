@@ -14,7 +14,8 @@ function constrain_sdp(model, s::ConstrainedLinearMap, Qi, Qj, Uij, Zij, nZ, γ)
 end
 
 
-function sdplyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, optimizer; verbose=0)
+function sdplyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, optimizer; 
+        verbose=0)
     modes=1:nstates(s)
     model = Model(optimizer)
     nA = size(s.resetmaps[1].A, 1)
@@ -24,7 +25,8 @@ function sdplyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, opti
         set_silent(model)
     end
     Q_vrefs = Dict(state => @variable(model, [i=1:nA, j=1:nA]) for state in modes)
-    Ui_vrefs = Dict(state => @variable(model, [i=1:nE, j=1:nE], lower_bound=0) for state in modes)
+    Ui_vrefs = Dict(state => @variable(model, [i=1:nE, j=1:nE], lower_bound=0) 
+        for state in modes)
     Zi_vrefs = Dict(state => @variable(model, [i=1:nD, j=1:nD]) for state in modes)
 
     for i in modes
@@ -63,5 +65,6 @@ function sdplyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, opti
         end
     end
 
-    status = (JuMP.termination_status(model), JuMP.primal_status(model), JuMP.dual_status(model), JuMP.raw_status(model))
+    status = (JuMP.termination_status(model), JuMP.primal_status(model), 
+        JuMP.dual_status(model), JuMP.raw_status(model))
 end

@@ -9,12 +9,14 @@ end
 
 function constrain_sos(model, s::ConstrainedLinearMap, Qi, Qj, Uij, Zij, nZ, γ, d, y)
     Ei = s.X[1]; Di = s.X[2]; Ai = s.A
-    @constraint(model, γ^(2d)*y'*Qi*y - y'*Ai'*Qj*Ai*y - y'*Ei'*Uij*Ei*y - y'*Di'*Zij*Di*y in SOSCone())
+    @constraint(model, γ^(2d)*y'*Qi*y - y'*Ai'*Qj*Ai*y - y'*Ei'*Uij*Ei*y 
+        - y'*Di'*Zij*Di*y in SOSCone())
     @constraint(model, Zij - Array(I(nZ)) in PSDCone())
 end
 
 
-function soslyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, d, optimizer; verbose=0)
+function soslyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, d, optimizer; 
+        verbose=0)
     n = size(s.resetmaps[1].A, 1)
     s = veroneselift(s, d)
     modes=1:nstates(s)
@@ -28,7 +30,8 @@ function soslyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, d, o
         set_silent(model)
     end
     Q_vrefs = Dict(state => @variable(model, [i=1:nA, j=1:nA]) for state in modes)
-    Ui_vrefs = Dict(state => @variable(model, [i=1:nE, j=1:nE], lower_bound=0) for state in modes)
+    Ui_vrefs = Dict(state => @variable(model, [i=1:nE, j=1:nE], lower_bound=0) 
+        for state in modes)
     Zi_vrefs = Dict(state => @variable(model, [i=1:nD, j=1:nD]) for state in modes)
 
     for i in modes
@@ -67,5 +70,6 @@ function soslyap_feasible_prog(γ, s::StateDepDiscreteSwitchedLinearSystem, d, o
         end
     end
 
-    status = (JuMP.termination_status(model), JuMP.primal_status(model), JuMP.dual_status(model), JuMP.raw_status(model))
+    status = (JuMP.termination_status(model), JuMP.primal_status(model), 
+        JuMP.dual_status(model), JuMP.raw_status(model))
 end

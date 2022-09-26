@@ -6,9 +6,11 @@ copy(Lmap::LinearMap) = LinearMap(copy(Lmap.A))
 
 copy(Lmap::ConstrainedLinearMap) = ConstrainedLinearMap(copy(Lmap.A), copy(Lmap.X))
 
-copy(s::ConstrainedContinuousIdentitySystem) = ConstrainedContinuousIdentitySystem(s.statedim, copy(s.X))
+copy(s::ConstrainedContinuousIdentitySystem) = 
+    ConstrainedContinuousIdentitySystem(s.statedim, copy(s.X))
 
-copy(s::AbstractSwitchedSystem) = HybridSystem(s.automaton, copy.(s.modes), copy.(s.resetmaps), s.switchings)
+copy(s::AbstractSwitchedSystem) = HybridSystem(s.automaton, copy.(s.modes), 
+    copy.(s.resetmaps), s.switchings)
 
 
 veroneselift(Lmap::LinearMap, d) = LinearMap(veroneselift(Lmap.A, d))

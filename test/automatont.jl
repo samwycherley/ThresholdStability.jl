@@ -6,7 +6,7 @@ import ThresholdStability: perms
     @test perms(3) == [[1.,1.,1.],[1.,1.,-1.],[1.,-1.,1.],[-1.,1.,1.],[1.,-1.,-1.],[-1.,1.,-1.],[-1.,-1.,1.],[-1.,-1.,-1.]]
 end
 
-function Base.:≈(X::T, Y::T) where T <: LightAutomaton
+function Base.:≈(X::T, Y::T) where T <: GraphAutomaton
     if X.G == Y.G && X.Σ == Y.Σ && X.nt == Y.nt && X.next_id == Y.next_id
         return true
     end
@@ -15,7 +15,7 @@ end
 
 
 Σ = [randn(2,2) for _ in 1:4]
-G = LightAutomaton(4)
+G = GraphAutomaton(4)
 add_transition!(G, 1, 1, 1)
 add_transition!(G, 1, 3, 1)
 add_transition!(G, 2, 1, 2)
@@ -47,6 +47,6 @@ H = OneStateAutomaton(4)
         Σn = [randn(2,2) for _ in 1:2^n]
         @test automaton_constructor(Σn) ≈ automaton_constructor(Σn, perms(n))
     end
-    @test islight(G) == true
-    @test islight(OneStateAutomaton(2)) == false
+    @test isgraphautomaton(G) == true
+    @test isgraphautomaton(OneStateAutomaton(2)) == false
 end

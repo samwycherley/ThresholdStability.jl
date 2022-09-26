@@ -1,4 +1,4 @@
-using DynamicPolynomials
+using DynamicPolynomials, LinearAlgebra
 using MathematicalSystems
 import ThresholdStability: veroneselift
 

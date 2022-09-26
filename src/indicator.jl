@@ -3,16 +3,20 @@ export indicator
 """
     indicator(y, b; indregion=:above, ineq=:nonstrict)
 
-Indicator variable of default form ``\\mathbf{1}\\{y ≥ b\\}``. The inequality can be made strict and the direction of inequality can be reversed.
+Indicator variable of default form ``\\mathbf{1}\\{y ≥ b\\}``. The inequality can be made 
+strict and the direction of inequality can be reversed.
 
 # Arguments
-- `ineq=:nonstrict` (default):  calculates ``\\mathbf{1}\\{y ≥ b\\}`` or ``\\mathbf{1}\\{y ≤ b\\}``.
+- `ineq=:nonstrict` (default):  calculates ``\\mathbf{1}\\{y ≥ b\\}`` or 
+``\\mathbf{1}\\{y ≤ b\\}``.
 - `ineq=:strict`: calculates ``\\mathbf{1}\\{y > b\\}`` or ``\\mathbf{1}\\{y < b\\}``.
-- `indregion=:above` (default): calculates ``\\mathbf{1}\\{y ≥ b\\}`` or ``\\mathbf{1}\\{y > b\\}``.
+- `indregion=:above` (default): calculates ``\\mathbf{1}\\{y ≥ b\\}`` or 
+``\\mathbf{1}\\{y > b\\}``.
 - `indregion=:below`: calculates ``\\mathbf{1}\\{y ≤ b\\}`` or ``\\mathbf{1}\\{y < b\\}``.
 """
 function indicator(y, b; indregion = :above, ineq=:nonstrict)
-    # Indicator function. The default mode ('above') returns 𝟏{y ≥ b}. The other available mode, 'below', returns 𝟏{y ≤ b}. Set 'ineq' to 'strict' to get 𝟏{y > b} or 𝟏{y < b}.
+    # Indicator function. The default mode ('above') returns 𝟏{y ≥ b}. The other available 
+    # mode, 'below', returns 𝟏{y ≤ b}. Set 'ineq' to 'strict' to get 𝟏{y > b} or 𝟏{y < b}.
     indregion = Symbol(indregion)
     ineq = Symbol(ineq)
     if ineq == :nonstrict
