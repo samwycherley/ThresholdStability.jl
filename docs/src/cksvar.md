@@ -43,7 +43,8 @@ G
 
 # output
 
-GraphAutomaton{Graphs.SimpleGraphs.SimpleDiGraph{Int64}, Graphs.SimpleGraphs.SimpleEdge{Int64}}(Graphs.SimpleGraphs.SimpleDiGraph{Int64}(5, [[1, 2], [3], [1, 3]], [[1, 3], [1], [2, 3]]), Dict{Graphs.SimpleGraphs.SimpleEdge{Int64}, Dict{Int64, Int64}}(Edge 1 => 2 => Dict(2 => 1), Edge 3 => 1 => Dict(5 => 3), Edge 1 => 1 => Dict(1 => 1), Edge 3 => 3 => Dict(4 => 3), Edge 2 => 3 => Dict(3 => 2)), 5, 5)```
+GraphAutomaton{Graphs.SimpleGraphs.SimpleDiGraph{Int64}, Graphs.SimpleGraphs.SimpleEdge{Int64}}(Graphs.SimpleGraphs.SimpleDiGraph{Int64}(5, [[1, 2], [3], [1, 3]], [[1, 3], [1], [2, 3]]), Dict{Graphs.SimpleGraphs.SimpleEdge{Int64}, Dict{Int64, Int64}}(Edge 1 => 2 => Dict(2 => 1), Edge 3 => 1 => Dict(5 => 3), Edge 1 => 1 => Dict(1 => 1), Edge 3 => 3 => Dict(4 => 3), Edge 2 => 3 => Dict(3 => 2)), 5, 5)
+```
 
 ## Indicator
 `indicator` can be used in building functions to convert models to TVAR form. Examples: 
