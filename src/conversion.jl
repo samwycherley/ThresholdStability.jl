@@ -23,7 +23,7 @@ end
 
 function unconstrained(s::AbstractSwitchedSystem)
     if typeof(s) <: ConstrainedDiscreteSwitchedLinearSystem
-        s = HybridSystem(OneStateAutomaton(nstates(s.automaton)), s.modes, s.resetmaps, 
+        s = HybridSystem(OneStateAutomaton(s.automaton.nt), s.modes, s.resetmaps, 
             s.switchings)
     elseif typeof(s) <: StateDepDiscreteSwitchedLinearSystem
         n = nstates(s.automaton)
