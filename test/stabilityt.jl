@@ -44,6 +44,7 @@ end
     @test (γsos1 ≥ 2 && γsos1 ≤ 2.1)
     @test (γsos2 ≥ 1.1 && γsos2 ≤ 1.2)
     @test (γsos3 ≥ 3.1 && γsos2 ≤ 3.2)
+    @test rjsr(s3) ≈ γsos3
 end
 
 @testset "(C)JSR calculation" begin

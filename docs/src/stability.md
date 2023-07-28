@@ -54,13 +54,15 @@ For information on how to construct switched systems `s`, please see the
 
 ## SCJSR
 This package contains two methods to compute upper bounds on the SCJSR, one solving a 
-semidefinite program (SDP) directly and another solving a sum of squares (SOS) program.
+semidefinite program (SDP) directly and another solving a sum of squares (SOS) program. The
+`rjsr` function is a more convenient way of implementing `sosbound_γ`
 
 ```@docs
 sosbound_γ
 sosbound_gamma
 sdpbound_γ
 sdpbound_gamma
+rjsr
 ```
 
 Since each ``\mathscr{X}_i`` is a convex polyhedron described by two matrices, `E_i` and 
