@@ -62,7 +62,7 @@ system `s` using the `soslyapb` method.
 """
 rjsr(s::AbstractSwitchedSystem; d = 2, optimizer = 
     optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true)) = 
-    soslyapb(s, d, optimizer_constructor = optimizer)[2]
+    sosbound_γ(s, 2, optimizer=optimizer)
 
 
 
