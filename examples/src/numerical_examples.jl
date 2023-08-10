@@ -7,31 +7,6 @@ using Parameters, Distributions
 
 extract_est(parname, df) = @subset(df, in([parname]).(:Parameter)).:Estimate[1]
 
-function render_canonical(Φ_0)
-    ϕ_0yy_pos = Φ_0[1, 1]
-    ϕ_0xy_pos = Φ_0[2:end, 1]
-    ϕ_0yy_neg = Φ_0[1,2]
-    ϕ_0xy_neg = Φ_0[2:end, 2]
-    ϕ_0yx = Φ_0[1, 3:end]
-    Φ_0xx = Φ_0[2:end, 3:end]
-    d = size(Φ_0xx)
-    Φ_0xx_inv = inv(Φ_0xx)
-
-    ϕ_0yy_pos_canon = ϕ_0yy_pos - ϕ_0yx'*Φ_0xx_inv*ϕ_0xy_pos
-    ϕ_0yy_neg_canon = ϕ_0yy_neg - ϕ_0yx'*Φ_0xx_inv*ϕ_0xy_neg
-
-    P_inv = zeros(d[1]+2,d[2]+2)
-    P_inv[1, 1] = ϕ_0yy_pos_canon
-    P_inv[2, 2] = ϕ_0yy_neg_canon
-    P_inv[3:end, 1] = ϕ_0xy_pos
-    P_inv[3:end, 2] = ϕ_0xy_neg
-    P_inv[3:end, 3:end] = Φ_0xx
-    
-    Q = Array{Float64}(I(d[2]+1))
-    Q[1, 2:end] = -ϕ_0yx'*Φ_0xx_inv
-    return (P = inv(P_inv), Q = Q)
-end
-
 ## Example 2.1: monetary policy
 MPModel = @with_kw (ψ = 0.9,                # natural rate persistence
                     γ = 1.5,                # Taylor rule coefficient
