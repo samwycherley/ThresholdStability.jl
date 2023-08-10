@@ -1,5 +1,6 @@
 using ThresholdStability
 using Test
+using LinearAlgebra
 
 include("indicatort.jl")
 include("automatont.jl")

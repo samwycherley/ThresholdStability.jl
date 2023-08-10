@@ -58,3 +58,21 @@ Fstar = [1; -1; 0]
                   0.0 1.0 1.0 0.0 0.0 0.0 0.0;  0.0 0.0 0.0 0.0 0.0 0.0 0.0;
                   0.0 0.0 1.0 0.0 0.0 0.0 0.0]]
 end
+
+function I_star(k)
+      I_st = zeros(k,k+1)
+      I_st[1,1] = 1.
+      I_st[1:end,2:end] = I(k)
+      I_st
+end
+
+@testset "Canonical CKSVAR" begin
+      Φ_01 = I_star(3)
+      Φ_02 = I_star(3)
+      Φ_01[1,1] = 2.
+      Φ_02[2:3,3:4] = [3. -2.; 5. 2.]
+      P1, Q1 = render_canonical(Φ_01)
+      P2, Q2 = render_canonical(Φ_02)
+      @test Q1*Φ_01*P1 ≈ I_star(3)
+      @test Q2*Φ_02*P2 ≈ I_star(3)
+end
