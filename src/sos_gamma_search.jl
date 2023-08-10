@@ -86,5 +86,6 @@ end
 Alias for [`sosbound_γ`](@ref).
 """
 sosbound_gamma(s::StateDepDiscreteSwitchedLinearSystem, d; 
-    optimizer=optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true), tol=1e-5, verbose=0, initstep=1.1) = sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; 
+    optimizer=optimizer_with_attributes(CSDP.Optimizer, MOI.Silent() => true), tol=1e-5, 
+    verbose=0, initstep=1.1) = sosbound_γ(s::StateDepDiscreteSwitchedLinearSystem, d; 
         optimizer=optimizer, tol=tol, verbose=verbose, initstep=initstep)

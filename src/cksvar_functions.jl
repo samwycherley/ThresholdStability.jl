@@ -1,4 +1,4 @@
-export CKSVAR_to_TAR, CKSVAR_to_companion, CKSVAR_to_companionFD
+export CKSVAR_to_TAR, CKSVAR_to_companion, CKSVAR_to_companionFD, render_canonical
 
 function split_by_var(C)
     # Splits 𝐂 into 𝐂₁ corresponding to 𝐘ₜ (all bar final row of 𝐂) and 𝐂₂ corresponding 
@@ -250,4 +250,36 @@ function CKSVAR_to_companionFD(F, Fstar, βtilde, nlags; diff = true)
             end
         end
     Vector{Array{Float64, 2}}(Σ)
+end
+
+
+"""
+    render_canonical(Φ_0)
+
+Produce the matrices `P` and `Q` required to transform a noncanonical CKSVAR into a 
+canonical CKSVAR. See Section 2.2 in [DMW23](https://arxiv.org/abs/2307.06190) for details.
+"""
+function render_canonical(Φ_0)
+    ϕ_0yy_pos = Φ_0[1, 1]
+    ϕ_0xy_pos = Φ_0[2:end, 1]
+    ϕ_0yy_neg = Φ_0[1,2]
+    ϕ_0xy_neg = Φ_0[2:end, 2]
+    ϕ_0yx = Φ_0[1, 3:end]
+    Φ_0xx = Φ_0[2:end, 3:end]
+    d = size(Φ_0xx)
+    Φ_0xx_inv = inv(Φ_0xx)
+
+    ϕ_0yy_pos_canon = ϕ_0yy_pos - ϕ_0yx'*Φ_0xx_inv*ϕ_0xy_pos
+    ϕ_0yy_neg_canon = ϕ_0yy_neg - ϕ_0yx'*Φ_0xx_inv*ϕ_0xy_neg
+
+    P_inv = zeros(d[1]+2,d[2]+2)
+    P_inv[1, 1] = ϕ_0yy_pos_canon
+    P_inv[2, 2] = ϕ_0yy_neg_canon
+    P_inv[3:end, 1] = ϕ_0xy_pos
+    P_inv[3:end, 2] = ϕ_0xy_neg
+    P_inv[3:end, 3:end] = Φ_0xx
+    
+    Q = Array{Float64}(I(d[2]+1))
+    Q[1, 2:end] = -ϕ_0yx'*Φ_0xx_inv
+    return (P = inv(P_inv), Q = Q)
 end

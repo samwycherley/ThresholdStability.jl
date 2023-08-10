@@ -108,37 +108,4 @@ X = [[E_1, D_1], [E_2, D_2], [E_3, D_3], [E_4, D_4]]
 Here, each `D_i` is a matrix of zeros since there are no censored variables in the state 
 vector.
 
-## SCJSR calculation details
-### SDP program
-The upper bound on the SCJSR found by [`sdpbound_γ`](@ref) involves finding the minimum 
-value of the scalar ``\gamma`` s.t. the semidefinite program
-```math
-\begin{aligned}
-Q_i-E_i^TU_iE_i+D_i^TZ_iD_i&\succ0\qquad\text{for }i=1,\dots,m,\\
-\gamma^2Q_i-A_\sigma^TQ_jA_\sigma-E_i^TU_{ij}E_i+D_i^TZ_{ij}D_i&\succeq0\qquad\text{for }
-(i,j,\sigma)\in G,
-\end{aligned}
-```
-is feasible, where ``U_i\geq0``, ``U_{ij}\geq0``, ``Z_i\succ0`` and ``Z_{ij}\succ0`` are 
-otherwise arbitrary. Here, ``\geq`` denotes element-wise inequality, ``A\succ0`` indicates 
-``A`` is positive definite and ``A\succeq0`` indicates ``A`` is positive semidefinite.
-
-### SOS program
-The upper bound on the SCJSR found using [`sosbound_γ`](@ref) is generally less 
-conservative than that found by [`sdpbound_γ`](@ref); [`sosbound_γ`](@ref) is thus 
-recommended.
-
-As in [Parillo and Jadbabaie (2008)](https://arxiv.org/abs/0712.2887), let ``x^{[d]}`` 
-denote the ``d``-lift of vector ``x`` and let ``A^{[d]}`` be defined as the matrix such 
-that ``(Ax)^{[d]}=A^{[d]}x^{[d]}``. Let ``y=x^{[d]}``. Now, [`sosbound_γ`](@ref) involves 
-finding ``\gamma`` that minimizes
-```math
-\begin{aligned}
-y^TQ_iy-(E_i^{[d]}y)^TU_iE_i^{[d]}y+(D_i^{[d]}y)^TZ_iD_i^{[d]}y-y^Ty&\enskip\text{ is SOS}
-\qquad\text{for }i=1,\dots,m,\\
-\gamma^{2d}y^TQ_iy-(A_\sigma^{[d]}y)^TQ_jA_\sigma^{[d]}y\qquad\qquad&\\
--(E_i^{[d]}y)^TU_{ij}^{[d]}E_i^{[d]}y + (D_i^{[d]}y)^TZ_{ij}D_i^{[d]}y &\enskip
-\text{ is SOS}\qquad\text{for }(i,j,\sigma)\in G,
-\end{aligned}
-```
-where ``U_i\geq0``, ``U_{ij}\geq0``, ``Z_i\succ0`` and ``Z_{ij}\succ0``.
+For computational details, see the Appendix of [DMW23](https://arxiv.org/abs/2307.06190).

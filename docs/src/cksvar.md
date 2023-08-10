@@ -8,6 +8,7 @@ Ox code to estimate CKSVAR models is available [here](https://drive.google.com/f
 CKSVAR_to_TAR
 CKSVAR_to_companion
 CKSVAR_to_companionFD
+render_canonical
 ```
 
 ## Construction of automata
