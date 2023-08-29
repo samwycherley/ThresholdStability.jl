@@ -63,15 +63,15 @@ model = MPModel(χ=0.9999, μ=0.5,ψ=0.999999,θ=-10)
 @show ρ.(construct_mp_canonical(model))
 
 
-## Example 2.2: dynamic Tobit
+## Example 2.2: univariate VTAR(2)
 E1, E2, E3, E4 = [1 0.; 0 1.], [1 0.; 0 -1.], [-1 0.; 0 1.], [-1 0.; 0 -1.]
 D1 = zeros(1,2); D2, D3, D4 = copy(D1), copy(D1), copy(D1)
 
-DynamicTobit = @with_kw (c = 0,                                         # constant
-                         k = 2,                                         # number of lags
-                         ϕ_pos = [0.9, 0.2],                            # vector ϕ_+
-                         ϕ_neg = [0.5, 0.5],                            # vector ϕ_-
-                         X = [[E1, D1], [E2, D2], [E3, D3], [E4, D4]]   # state space char
+VTAR = @with_kw (c = 0,                                         # constant
+                 k = 2,                                         # number of lags
+                 ϕ_pos = [0.9, 0.2],                            # vector ϕ_+
+                 ϕ_neg = [0.5, 0.5],                            # vector ϕ_-
+                 X = [[E1, D1], [E2, D2], [E3, D3], [E4, D4]]   # state space char
 )
 
 
@@ -94,7 +94,7 @@ function AR2_to_TAR(ϕs, ϕ_stars)
 end
 
 
-function construct_dynamic_tobit2(params)
+function construct_AR2(params)
     @unpack ϕ_pos, ϕ_neg, k = params
     @assert k == 2
     ϕ = ϕ_pos - ϕ_neg
@@ -102,46 +102,46 @@ function construct_dynamic_tobit2(params)
 end
 
 
-function construct_dynamic_tobit2_system(params)
+function construct_AR2_system(params)
     @unpack X, k = params
     @assert k == 2
-    Σ = construct_dynamic_tobit2(params)
+    Σ = construct_AR2(params)
     return discreteswitchedsystem(Σ, automaton_constructor(Σ), X)
 end
 
 
 # Parametrizations
 # ϕ_pos = (.6, .3), ϕ_neg = (.2, .1)
-dt_model = DynamicTobit(ϕ_pos = [.6, .3], ϕ_neg = [.2, .1])
-s1 = construct_dynamic_tobit2_system(dt_model)
+dt_model = VTAR(ϕ_pos = [.6, .3], ϕ_neg = [.2, .1])
+s1 = construct_AR2_system(dt_model)
 @show jsr(s1)
 @show cjsr(s1)
 @show rjsr(s1)
 
 # ϕ_pos = (.6, .4), ϕ_neg = (.3, .1)
-dt_model = DynamicTobit(ϕ_pos = [.6, .4], ϕ_neg = [.3, .1])
-s2 = construct_dynamic_tobit2_system(dt_model)
+dt_model = VTAR(ϕ_pos = [.6, .4], ϕ_neg = [.3, .1])
+s2 = construct_AR2_system(dt_model)
 @show jsr(s2)
 @show cjsr(s2)
 @show rjsr(s2)
 
 # ϕ_pos = (.7, -.1), ϕ_neg = (.2, 0.)
-dt_model = DynamicTobit(ϕ_pos = [.7, -.1], ϕ_neg = [.2, 0.])
-s3 = construct_dynamic_tobit2_system(dt_model)
+dt_model = VTAR(ϕ_pos = [.7, -.1], ϕ_neg = [.2, 0.])
+s3 = construct_AR2_system(dt_model)
 @show jsr(s3)
 @show cjsr(s3)
 @show rjsr(s3)
 
 # ϕ_pos = (1.2, -1.2), ϕ_neg = (.6, -.6)
-dt_model = DynamicTobit(ϕ_pos = [1.2, -1.2], ϕ_neg = [.6, -.6])
-s4 = construct_dynamic_tobit2_system(dt_model)
+dt_model = VTAR(ϕ_pos = [1.2, -1.2], ϕ_neg = [.6, -.6])
+s4 = construct_AR2_system(dt_model)
 @show jsr(s4)
 @show cjsr(s4)
 @show rjsr(s4)
 
 # ϕ_pos = (1, -.97), ϕ_neg = (.5, -.5)
-dt_model = DynamicTobit(ϕ_pos = [1, -.97], ϕ_neg = [.5, -.5])
-s5 = construct_dynamic_tobit2_system(dt_model)
+dt_model = VTAR(ϕ_pos = [1, -.97], ϕ_neg = [.5, -.5])
+s5 = construct_AR2_system(dt_model)
 @show jsr(s5)
 @show cjsr(s5)
 @show rjsr(s5)
