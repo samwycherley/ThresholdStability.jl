@@ -1,5 +1,5 @@
 using ThresholdStability
-using CSV, DataFrames, DataFramesMeta
+using CSV, HTTP, DataFrames, DataFramesMeta
 using LinearAlgebra
 
 extract_est(parname, df) = @subset(df, in([parname]).(:Parameter)).:Estimate[1]
